@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jo-im/fantastic-beasts-api/issues"
   },
-  "homepage": "https://github.com/jo-im/fantastic-beasts-api#readme"
+  "homepage": "https://github.com/jo-im/fantastic-beasts-api#readme",
+  "dependencies": {
+    "webpack": "^1.13.3"
+  }
 }
