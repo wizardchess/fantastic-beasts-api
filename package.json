@@ -1,0 +1,19 @@
+{
+  "name": "fantastic-beasts-api",
+  "version": "1.0.0",
+  "description": "Fantastic Beasts and Where To Find Them API",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jo-im/fantastic-beasts-api.git"
+  },
+  "author": "Jo Im and Jay Arella",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jo-im/fantastic-beasts-api/issues"
+  },
+  "homepage": "https://github.com/jo-im/fantastic-beasts-api#readme"
+}
