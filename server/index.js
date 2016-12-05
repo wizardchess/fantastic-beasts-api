@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const Beast = require('./models/beasts');
 
+console.log('dirname is', __dirname);
+app.use('/', express.static(`${__dirname}/../public`));
 //Configure app for bodyParser()
 app.use(bodyParser.urlencoded( { extended: true }));
 //Let us grab data from the body of a POST
@@ -38,5 +41,62 @@ router.use((req, res, next) => {
 router.get('/', (req, res) => {
   res.json({message: 'Here are all the fantastic beasts!'});
 });
+
+//Route to find and post a beast
+router.route('/beasts')
+   .post((req, res) => {
+      const beast = new Beast();
+      beast.name = req.body.name;
+      beast.classification = req.body.classification;
+      beast.location = req.body.location;
+
+      beast.save(err => {
+        if (err) {
+          res.send(err);
+        }
+        res.json({ message: 'Beast was successfully saved'});
+      });
+   })
+   .get((req, res) => {
+     Beast.find((err, beasts) => {
+       if (err) {
+         res.send(err);
+       }
+
+       res.json( beasts );
+     });
+   });
+
+//Route to find beasts by classification
+router.route('/beasts/classification/:classification')
+	.get((req, res) => {
+       Beast.find( { classification: req.params.classification }, (err, beast) => {
+         if (err) {
+           res.send(err);
+         }
+         res.json( beast );
+       });
+	});
+
+//Route to search beast by name
+router.route('/beasts/:name')
+   .get((req, res) => {
+     Beast.find( { name: req.params.name }, (err, beast) => {
+       if (err) {
+         res.send(err);
+       }
+       res.json( beast );
+     });
+   });
+
+router.route('/beasts/location/:location')
+   .get((req, res) => {
+     Beast.find( { location: req.params.location }, (err, beast) => {
+       if (err) {
+         res.send(err);
+       }
+       res.json( beast );
+     });
+   });
 
 app.listen(port);
